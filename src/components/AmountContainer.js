@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { toggleModal } from '../actions'
+import { showModal } from '../actions'
 
 class AmountContainer extends Component {
   render() {
@@ -20,7 +20,7 @@ class AmountContainer extends Component {
 
   _showModal() {
     // set modalVisible to `true`
-    this.props.toggleModal()
+    this.props.showModal()
   }
 }
 
@@ -60,4 +60,4 @@ const mapStateToProps = ({ total }) => {
   return { total }
 }
 
-export default connect(mapStateToProps, { toggleModal })(AmountContainer)
+export default connect(mapStateToProps, { showModal })(AmountContainer)

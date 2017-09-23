@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { connect } from 'react-redux'
-import { toggleModal } from '../actions'
+import { hideModal } from '../actions'
 
 class ModalContainer extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ModalContainer extends Component {
           <View style={styles.backContainer}>
             <TouchableOpacity
               style={styles.backButton}
-              onPress={this.props.toggleModal}
+              onPress={this._closeModal.bind(this)}
             >
               <Text style={styles.back}> ← </Text>
             </TouchableOpacity>
@@ -85,6 +85,15 @@ class ModalContainer extends Component {
       </Modal>
     )
   }
+
+  _closeModal() {
+    this.setState({
+      name: '',
+      amount: '',
+      date: new Date()
+    })
+    this.props.hideModal()
+  }
 }
 
 const styles = {
@@ -130,4 +139,4 @@ const mapStateToProps = ({ modalVisible }) => {
   return { modalVisible }
 }
 
-export default connect(mapStateToProps, { toggleModal })(ModalContainer)
+export default connect(mapStateToProps, { hideModal })(ModalContainer)

@@ -1,7 +1,13 @@
-const toggleModal = () => {
+const showModal = () => {
   return {
-    type: 'TOGGLE_MODAL'
+    type: 'SHOW_MODAL'
   }
 }
 
-export { toggleModal }
+const hideModal = () => {
+  return {
+    type: 'HIDE_MODAL'
+  }
+}
+
+export { showModal, hideModal }
