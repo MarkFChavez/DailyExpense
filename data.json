@@ -35,6 +35,27 @@
         { "id": 1, "name": "Lunch", "amount": 300 },
         { "id": 2, "name": "Uber X (going home)", "amount": 800 }
       ]
+    },
+    {
+      "title": "September 16, 2017",
+      "data": [
+        { "id": 1, "name": "Lunch", "amount": 300 },
+        { "id": 2, "name": "Uber X (going home)", "amount": 800 }
+      ]
+    },
+    {
+      "title": "September 16, 2017",
+      "data": [
+        { "id": 1, "name": "Lunch", "amount": 300 },
+        { "id": 2, "name": "Uber X (going home)", "amount": 800 }
+      ]
+    },
+    {
+      "title": "September 16, 2017",
+      "data": [
+        { "id": 1, "name": "Lunch", "amount": 300 },
+        { "id": 2, "name": "Uber X (going home)", "amount": 800 }
+      ]
     }
   ]
 }

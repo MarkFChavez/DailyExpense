@@ -37,7 +37,6 @@ const styles = {
     right: 20,
     bottom: 20,
     borderWidth: 1,
-    borderRadius: 50,
     borderColor: '#fff',
     width: 100,
     padding: 5
