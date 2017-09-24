@@ -1,7 +1,12 @@
-import data from '../../data.json'
+const initialState = null
 
-const TotalAmountReducer = (state = data.total, action) => {
-  return state
+const TotalAmountReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD_TOTAL':
+      return Number(state) + Number(action.payload)
+    default:
+      return state
+  }
 }
 
 export default TotalAmountReducer

@@ -10,15 +10,17 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { connect } from 'react-redux'
-import { hideModal } from '../actions'
+import { hideModal, addExpense, addTotal } from '../actions'
 
 class ModalContainer extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       name: '',
       amount: '',
-      date: new Date()
+      date: new Date(),
+      isValid: false
     }
   }
 
@@ -48,6 +50,7 @@ class ModalContainer extends Component {
               style={styles.textInput}
               placeholder="e.g. Bought myself a milk"
               value={this.state.name}
+              autoCorrect={false}
               onChangeText={name => this.setState({ name })}
             />
 
@@ -56,6 +59,7 @@ class ModalContainer extends Component {
               placeholder="30.00"
               keyboardType="numeric"
               value={this.state.amount}
+              autoCorrect={false}
               onChangeText={amount => this.setState({ amount })}
             />
 
@@ -77,7 +81,10 @@ class ModalContainer extends Component {
               justifyContent: 'flex-end'
             }}
           >
-            <TouchableOpacity style={styles.addExpenseButton}>
+            <TouchableOpacity
+              style={styles.addExpenseButton}
+              onPress={this._addExpense.bind(this)}
+            >
               <Text style={{ fontSize: 18, color: '#fff' }}> Add Expense </Text>
             </TouchableOpacity>
           </View>
@@ -86,12 +93,39 @@ class ModalContainer extends Component {
     )
   }
 
-  _closeModal() {
+  _formatDate(date) {
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const year = date.getUTCFullYear()
+
+    return `${month}/${day}/${year}`
+  }
+
+  _addExpense() {
+    const { name, amount, date } = this.state
+    const formattedDate = this._formatDate(date)
+
+    // should only happen if validation succeeds
+    if (name !== '' && amount !== '') {
+      this.props.addExpense({ name, amount, date: formattedDate })
+      this.props.addTotal(amount)
+      this.props.hideModal()
+      this._resetState()
+    } else {
+      console.log('Failed validation')
+    }
+  }
+
+  _resetState() {
     this.setState({
       name: '',
       amount: '',
       date: new Date()
     })
+  }
+
+  _closeModal() {
+    this._resetState()
     this.props.hideModal()
   }
 }
@@ -120,11 +154,9 @@ const styles = {
   addExpenseButton: {
     alignSelf: 'center',
     marginVertical: 20,
-    borderWidth: 1,
-    borderColor: '#000',
     paddingHorizontal: 10,
-    paddingVertical: 10,
-    backgroundColor: '#000'
+    paddingVertical: 20,
+    backgroundColor: '#2ecc71'
   },
   textInput: {
     height: 40,
@@ -139,4 +171,6 @@ const mapStateToProps = ({ modalVisible }) => {
   return { modalVisible }
 }
 
-export default connect(mapStateToProps, { hideModal })(ModalContainer)
+export default connect(mapStateToProps, { hideModal, addExpense, addTotal })(
+  ModalContainer
+)

@@ -13,7 +13,7 @@ import { Provider } from 'react-redux'
 import reducers from './src/reducers'
 import AmountContainer from './src/components/AmountContainer'
 import ModalContainer from './src/components/ModalContainer'
-import List from './src/components/List'
+import DataContainer from './src/components/DataContainer'
 
 export default class App extends React.Component {
   render() {
@@ -23,11 +23,7 @@ export default class App extends React.Component {
           <StatusBar barStyle={'light-content'} />
 
           <AmountContainer />
-
-          <View style={styles.dataContainer}>
-            <List />
-          </View>
-
+          <DataContainer />
           <ModalContainer />
         </View>
       </Provider>
@@ -37,10 +33,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  dataContainer: {
     flex: 1,
     backgroundColor: '#fff'
   }

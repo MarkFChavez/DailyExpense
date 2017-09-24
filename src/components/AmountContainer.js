@@ -11,11 +11,20 @@ class AmountContainer extends Component {
           style={styles.addButton}
           onPress={this._showModal.bind(this)}
         >
-          <Text style={styles.addText}> Add </Text>
+          <Text style={styles.addText}> New </Text>
         </TouchableOpacity>
-        <Text style={styles.amountText}> P{this.props.total} </Text>
+
+        {this._renderAmount()}
       </View>
     )
+  }
+
+  _renderAmount() {
+    if (this.props.total !== null) {
+      return <Text style={styles.amountText}> {this.props.total} </Text>
+    }
+
+    return <Text style={styles.amountText}>0.00</Text>
   }
 
   _showModal() {
@@ -36,10 +45,9 @@ const styles = {
     position: 'absolute',
     right: 20,
     bottom: 20,
-    borderWidth: 1,
-    borderColor: '#fff',
+    backgroundColor: '#2ecc71',
     width: 100,
-    padding: 5
+    padding: 10
   },
   addText: {
     fontSize: 18,

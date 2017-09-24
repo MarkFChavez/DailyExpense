@@ -3,7 +3,7 @@ import { View, Text, SectionList } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-class List extends Component {
+class DataContainer extends Component {
   render() {
     return <View style={styles.listContainer}>{this._renderData()}</View>
   }
@@ -12,24 +12,30 @@ class List extends Component {
     const { sections } = this.props
 
     if (sections.length > 0) {
+      const sortedSections = sections.sort((first, second) => {
+        first.title < second.title
+      })
+
       return (
         <SectionList
           keyExtractor={this._keyExtractor}
           renderSectionHeader={this._renderSectionHeader}
           renderItem={this._renderSectionItems}
-          sections={sections}
+          sections={sortedSections}
         />
       )
     } else {
       return (
         <View style={styles.noDataContainer}>
-          <Text style={styles.noDataContent}> some image here </Text>
+          <Text style={styles.noDataContent}>
+            Start tracking your daily expenses.
+          </Text>
         </View>
       )
     }
   }
 
-  _keyExtractor = (item, index) => item.id
+  _keyExtractor = (item, index) => item.name
 
   _renderSectionHeader({ section }) {
     return (
@@ -82,9 +88,10 @@ const styles = {
   },
   noDataContent: {
     fontSize: 24,
-    fontWeight: '500',
+    fontWeight: '300',
     fontFamily: 'Avenir Next',
-    opacity: 0.5
+    opacity: 0.5,
+    textAlign: 'center'
   }
 }
 
@@ -92,4 +99,4 @@ const mapStateToProps = ({ sections }) => {
   return { sections }
 }
 
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps)(DataContainer)
