@@ -48,7 +48,7 @@ class ModalContainer extends Component {
           <View style={{ flexGrow: 2 }}>
             <TextInput
               style={styles.textInput}
-              placeholder="e.g. Parking fee"
+              placeholder="PARKING FEE"
               value={this.state.name}
               autoCorrect={false}
               onChangeText={name => this.setState({ name })}
@@ -63,7 +63,7 @@ class ModalContainer extends Component {
               onChangeText={amount => this.setState({ amount })}
             />
 
-            <Text style={styles.dateLabel}>When did you spend it?</Text>
+            <Text style={styles.dateLabel}>WHEN DID YOU SPEND IT?</Text>
 
             <DatePickerIOS
               style={{ flex: 1 }}
@@ -85,7 +85,9 @@ class ModalContainer extends Component {
               style={styles.addExpenseButton}
               onPress={this._addExpense.bind(this)}
             >
-              <Text style={{ fontSize: 18, color: '#fff' }}> Add Expense </Text>
+              <Text style={{ fontSize: 18, fontWeight: '500', color: '#000' }}>
+                △DD EXPENSE
+              </Text>
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -155,7 +157,9 @@ const styles = {
     marginVertical: 20,
     paddingHorizontal: 10,
     paddingVertical: 20,
-    backgroundColor: '#2ecc71'
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#000'
   },
   textInput: {
     height: 40,
@@ -163,7 +167,7 @@ const styles = {
     borderBottomColor: '#000',
     marginHorizontal: 20,
     marginVertical: 10,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
     letterSpacing: 1
   }

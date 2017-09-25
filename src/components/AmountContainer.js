@@ -25,12 +25,12 @@ class AmountContainer extends Component {
               style={{
                 textAlign: 'center',
                 fontSize: 16,
-                fontWeight: '200',
+                fontWeight: '500',
                 color: '#ecf0f1',
                 letterSpacing: 1
               }}
             >
-              click here to add(+)
+              CLICK HERE TO ADD(+)
             </Text>
           </View>
         </TouchableOpacity>
@@ -61,7 +61,7 @@ const styles = {
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#3498db',
+    backgroundColor: '#2c3e50',
     alignSelf: 'stretch'
   },
   addButton: {
