@@ -5,7 +5,9 @@ const TotalAmountReducer = (state = initialState, action) => {
     case 'ADD_TOTAL':
       return Number(state) + Number(action.payload)
     case 'REDUCE_TOTAL':
-      return Number(state) - Number(action.payload)
+      const newTotal = Number(state) - Number(action.payload)
+      if (newTotal === 0) return null
+      return newTotal
     default:
       return state
   }
