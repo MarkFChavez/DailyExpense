@@ -1,4 +1,4 @@
-import { generateGUID } from '../helpers'
+import { generateGUID, sameDay } from '../helpers'
 
 const initialState = []
 
@@ -9,10 +9,10 @@ const ItemsReducer = (state = initialState, action) => {
 
       const uuid = generateGUID()
 
-      if (state.find(obj => obj.title === date) !== undefined) {
+      if (state.find(obj => sameDay(new Date(obj.title), date)) !== undefined) {
         // if key is found
         return state.map((item, index) => {
-          if (item.title === date) {
+          if (sameDay(new Date(item.title), date)) {
             return {
               title: date,
               data: item.data.concat({ name, amount, uuid })

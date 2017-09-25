@@ -40,7 +40,7 @@ class ModalContainer extends Component {
               style={styles.backButton}
               onPress={this._closeModal.bind(this)}
             >
-              <Text style={styles.back}> ← </Text>
+              <Text style={styles.back}> ← BACK </Text>
             </TouchableOpacity>
           </View>
 
@@ -48,7 +48,7 @@ class ModalContainer extends Component {
           <View style={{ flexGrow: 2 }}>
             <TextInput
               style={styles.textInput}
-              placeholder="e.g. Bought myself a milk"
+              placeholder="e.g. Parking fee"
               value={this.state.name}
               autoCorrect={false}
               onChangeText={name => this.setState({ name })}
@@ -56,7 +56,7 @@ class ModalContainer extends Component {
 
             <TextInput
               style={styles.textInput}
-              placeholder="30.00"
+              placeholder="250.00"
               keyboardType="numeric"
               value={this.state.amount}
               autoCorrect={false}
@@ -93,22 +93,13 @@ class ModalContainer extends Component {
     )
   }
 
-  _formatDate(date) {
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const year = date.getUTCFullYear()
-
-    return `${month}/${day}/${year}`
-  }
-
   _addExpense() {
     const { name, amount, date } = this.state
-    const formattedDate = this._formatDate(date)
 
     // should only happen if validation succeeds
     if (name !== '' && amount !== '') {
       // ACTUALLY ADDING THE EXPENSE
-      this.props.addExpense({ name, amount, date: formattedDate })
+      this.props.addExpense({ name, amount, date })
       this.props.addTotal(amount)
       this.props.hideModal()
       this._resetState()
@@ -140,17 +131,24 @@ const styles = {
     height: 50,
     alignSelf: 'flex-start'
   },
+  logoContainer: {
+    height: 50,
+    alignSelf: 'center'
+  },
   backButton: {
     paddingVertical: 10,
     paddingLeft: 10
   },
   back: {
-    fontSize: 24
+    fontSize: 18,
+    fontWeight: '500'
   },
   dateLabel: {
-    fontSize: 18,
     marginHorizontal: 20,
-    marginVertical: 10
+    marginVertical: 10,
+    fontSize: 16,
+    fontWeight: '500',
+    letterSpacing: 1
   },
   addExpenseButton: {
     alignSelf: 'center',
@@ -164,7 +162,10 @@ const styles = {
     borderBottomWidth: 1,
     borderBottomColor: '#000',
     marginHorizontal: 20,
-    marginVertical: 10
+    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: '500',
+    letterSpacing: 1
   }
 }
 

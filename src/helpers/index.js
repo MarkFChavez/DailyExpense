@@ -25,4 +25,12 @@ const generateGUID = () => {
   )
 }
 
-export { numberWithCommas, generateGUID }
+const sameDay = (firstDate, secondDate) => {
+  return (
+    firstDate.getFullYear() === secondDate.getFullYear() &&
+    firstDate.getMonth() === secondDate.getMonth() &&
+    firstDate.getDate() === secondDate.getDate()
+  )
+}
+
+export { numberWithCommas, generateGUID, sameDay }

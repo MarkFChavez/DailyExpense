@@ -6,6 +6,21 @@ import Swipeout from 'react-native-swipeout'
 import { numberWithCommas } from '../helpers'
 import { deleteExpense, reduceTotal } from '../actions'
 
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+
 class DataContainer extends Component {
   render() {
     return <View style={styles.listContainer}>{this._renderData()}</View>
@@ -22,7 +37,7 @@ class DataContainer extends Component {
       return (
         <SectionList
           keyExtractor={this._keyExtractor}
-          renderSectionHeader={this._renderSectionHeader}
+          renderSectionHeader={this._renderSectionHeader.bind(this)}
           renderItem={this._renderSectionItems.bind(this)}
           sections={sortedSections}
         />
@@ -38,12 +53,23 @@ class DataContainer extends Component {
     }
   }
 
+  _formatDate(date) {
+    const toDate = new Date(date)
+    const month = toDate.getMonth()
+    const day = toDate.getDate()
+    const year = toDate.getUTCFullYear()
+
+    return `${monthNames[month]} ${day}, ${year}`
+  }
+
   _keyExtractor = (item, index) => item.name
 
   _renderSectionHeader({ section }) {
     return (
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionHeader}>{section.title}</Text>
+        <Text style={styles.sectionHeader}>
+          {this._formatDate(section.title)}
+        </Text>
       </View>
     )
   }
@@ -82,7 +108,9 @@ class DataContainer extends Component {
               alignItems: 'flex-end'
             }}
           >
-            <Text style={styles.rowText}>{numberWithCommas(item.amount)}</Text>
+            <Text style={styles.rowText}>
+              {numberWithCommas(Number(item.amount).toFixed(2))}
+            </Text>
           </View>
         </View>
       </Swipeout>
@@ -100,7 +128,8 @@ const styles = {
   rowContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: 5
   },
   rowText: {
     fontFamily: 'Avenir Next',
@@ -131,7 +160,15 @@ const styles = {
 }
 
 const mapStateToProps = ({ sections }) => {
-  return { sections }
+  // sort sections (recent first)
+  const orderedSections = sections.sort((a, b) => {
+    return new Date(b.title) - new Date(a.title)
+  })
+
+  console.log('ORDERED SECTIONS ...')
+  console.log(orderedSections)
+
+  return { sections: orderedSections }
 }
 
 export default connect(mapStateToProps, { deleteExpense, reduceTotal })(
