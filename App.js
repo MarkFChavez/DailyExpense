@@ -6,19 +6,24 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
-  Modal
+  Modal,
+  AsyncStorage
 } from 'react-native'
-import { createStore } from 'redux'
+import { compose, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { persistStore, autoRehydrate } from 'redux-persist'
 import reducers from './src/reducers'
 import AmountContainer from './src/components/AmountContainer'
 import ModalContainer from './src/components/ModalContainer'
 import DataContainer from './src/components/DataContainer'
 
+let store = createStore(reducers, {}, compose(autoRehydrate()))
+persistStore(store, { storage: AsyncStorage })
+
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <View style={styles.container}>
           <StatusBar barStyle={'light-content'} />
 

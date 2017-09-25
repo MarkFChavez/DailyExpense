@@ -107,6 +107,7 @@ class ModalContainer extends Component {
 
     // should only happen if validation succeeds
     if (name !== '' && amount !== '') {
+      // ACTUALLY ADDING THE EXPENSE
       this.props.addExpense({ name, amount, date: formattedDate })
       this.props.addTotal(amount)
       this.props.hideModal()
