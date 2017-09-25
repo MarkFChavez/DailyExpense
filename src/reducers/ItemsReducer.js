@@ -1,4 +1,27 @@
-const initialState = []
+const initialState = [
+  {
+    title: '9/25/2017',
+    data: [
+      {
+        name: 'iOS Developer Program',
+        amount: 5000
+      },
+      {
+        name: 'GrabCar going to Times Plaza',
+        amount: 272
+      }
+    ]
+  },
+  {
+    title: '9/24/2017',
+    data: [
+      {
+        name: 'Udemy iOS Course',
+        amount: 500
+      }
+    ]
+  }
+]
 
 const ItemsReducer = (state = initialState, action) => {
   switch (action.type) {

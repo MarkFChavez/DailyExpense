@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, SectionList } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import Swipeout from 'react-native-swipeout'
+import { numberWithCommas } from '../helpers'
 
 class DataContainer extends Component {
   render() {
@@ -46,11 +48,36 @@ class DataContainer extends Component {
   }
 
   _renderSectionItems({ item }) {
+    const swipeoutButtons = [
+      {
+        text: 'Delete',
+        type: 'delete'
+      }
+    ]
     return (
-      <View style={styles.rowContainer}>
-        <Text style={styles.rowNameText}>{item.name}</Text>
-        <Text style={styles.rowAmountText}>{item.amount}</Text>
-      </View>
+      <Swipeout
+        autoClose={true}
+        close={true}
+        style={{
+          backgroundColor: 'transparent'
+        }}
+        right={swipeoutButtons}
+      >
+        <View style={styles.rowContainer}>
+          <View style={{ flex: 3 }}>
+            <Text style={styles.rowText}>{item.name}</Text>
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'flex-end'
+            }}
+          >
+            <Text style={styles.rowText}>{numberWithCommas(item.amount)}</Text>
+          </View>
+        </View>
+      </Swipeout>
     )
   }
 }
@@ -67,18 +94,18 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  rowNameText: {
+  rowText: {
     fontFamily: 'Avenir Next',
-    fontSize: 14
+    fontSize: 17
   },
   sectionContainer: {
     borderBottomWidth: 1,
     borderBottomColor: '#000',
-    marginBottom: 5
+    marginVertical: 10
   },
   sectionHeader: {
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: 17,
     fontFamily: 'Avenir Next'
   },
   noDataContainer: {
