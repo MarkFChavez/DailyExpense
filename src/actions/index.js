@@ -21,6 +21,16 @@ const addExpense = ({ name, amount, date }) => {
   }
 }
 
+const deleteExpense = itemUUID => {
+  // uuid to delete
+  return {
+    type: 'DELETE_EXPENSE',
+    payload: {
+      itemUUID
+    }
+  }
+}
+
 const addTotal = amount => {
   return {
     type: 'ADD_TOTAL',
@@ -28,4 +38,18 @@ const addTotal = amount => {
   }
 }
 
-export { showModal, hideModal, addExpense, addTotal }
+const reduceTotal = amount => {
+  return {
+    type: 'REDUCE_TOTAL',
+    payload: amount
+  }
+}
+
+export {
+  showModal,
+  hideModal,
+  addExpense,
+  deleteExpense,
+  addTotal,
+  reduceTotal
+}

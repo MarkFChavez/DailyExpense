@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import Swipeout from 'react-native-swipeout'
 import { numberWithCommas } from '../helpers'
+import { deleteExpense, reduceTotal } from '../actions'
 
 class DataContainer extends Component {
   render() {
@@ -22,7 +23,7 @@ class DataContainer extends Component {
         <SectionList
           keyExtractor={this._keyExtractor}
           renderSectionHeader={this._renderSectionHeader}
-          renderItem={this._renderSectionItems}
+          renderItem={this._renderSectionItems.bind(this)}
           sections={sortedSections}
         />
       )
@@ -51,7 +52,14 @@ class DataContainer extends Component {
     const swipeoutButtons = [
       {
         text: 'Delete',
-        type: 'delete'
+        type: 'delete',
+        onPress: () => {
+          // delete expense
+          // reduceTotal
+          // if no items, remove the section as well
+          this.props.deleteExpense(item.uuid)
+          this.props.reduceTotal(item.amount)
+        }
       }
     ]
     return (
@@ -126,4 +134,6 @@ const mapStateToProps = ({ sections }) => {
   return { sections }
 }
 
-export default connect(mapStateToProps)(DataContainer)
+export default connect(mapStateToProps, { deleteExpense, reduceTotal })(
+  DataContainer
+)
