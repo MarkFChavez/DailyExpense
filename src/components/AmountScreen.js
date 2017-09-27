@@ -19,7 +19,7 @@ class AmountScreen extends Component {
           D△ILYSPEND
         </Text>
         {this._renderAmount()}
-        <TouchableOpacity onPress={this._showModal.bind(this)}>
+        <TouchableOpacity onPress={this.props.showModal}>
           <View>
             <Text
               style={{
@@ -48,11 +48,6 @@ class AmountScreen extends Component {
     }
 
     return <Text style={styles.amountText}>0.00</Text>
-  }
-
-  _showModal() {
-    // set modalVisible to `true`
-    this.props.showModal()
   }
 }
 
