@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showModal } from '../actions'
 import { numberWithCommas } from '../helpers'
 
-class AmountContainer extends Component {
+class AmountScreen extends Component {
   render() {
     return (
       <View style={styles.amountContainer}>
@@ -89,4 +89,4 @@ const mapStateToProps = ({ total }) => {
   return { total }
 }
 
-export default connect(mapStateToProps, { showModal })(AmountContainer)
+export default connect(mapStateToProps, { showModal })(AmountScreen)

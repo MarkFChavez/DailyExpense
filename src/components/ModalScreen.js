@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux'
 import { hideModal, addExpense, addTotal } from '../actions'
 
-class ModalContainer extends Component {
+class ModalScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -178,5 +178,5 @@ const mapStateToProps = ({ modalVisible }) => {
 }
 
 export default connect(mapStateToProps, { hideModal, addExpense, addTotal })(
-  ModalContainer
+  ModalScreen
 )

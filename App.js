@@ -13,9 +13,9 @@ import { compose, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
 import reducers from './src/reducers'
-import AmountContainer from './src/components/AmountContainer'
-import ModalContainer from './src/components/ModalContainer'
-import DataContainer from './src/components/DataContainer'
+import AmountScreen from './src/components/AmountScreen'
+import ModalScreen from './src/components/ModalScreen'
+import DataScreen from './src/components/DataScreen'
 
 let store = createStore(reducers, {}, compose(autoRehydrate()))
 persistStore(store, { storage: AsyncStorage })
@@ -27,9 +27,9 @@ export default class App extends React.Component {
         <View style={styles.container}>
           <StatusBar barStyle={'light-content'} />
 
-          <AmountContainer />
-          <DataContainer />
-          <ModalContainer />
+          <AmountScreen />
+          <DataScreen />
+          <ModalScreen />
         </View>
       </Provider>
     )

@@ -21,9 +21,13 @@ const monthNames = [
   'December'
 ]
 
-class DataContainer extends Component {
+class DataScreen extends Component {
   render() {
-    return <View style={styles.listContainer}>{this._renderData()}</View>
+    return (
+      <View style={styles.listContainer}>
+        {this._renderData()}
+      </View>
+    )
   }
 
   _renderData() {
@@ -35,12 +39,15 @@ class DataContainer extends Component {
       })
 
       return (
-        <SectionList
-          keyExtractor={this._keyExtractor}
-          renderSectionHeader={this._renderSectionHeader.bind(this)}
-          renderItem={this._renderSectionItems.bind(this)}
-          sections={sortedSections}
-        />
+        <View style={{ flex: 1 }}>
+          <Text style={styles.swipeToDelete}>- SWIPE ITEMS TO DELETE -</Text>
+          <SectionList
+            keyExtractor={this._keyExtractor}
+            renderSectionHeader={this._renderSectionHeader.bind(this)}
+            renderItem={this._renderSectionItems.bind(this)}
+            sections={sortedSections}
+          />
+        </View>
       )
     } else {
       return (
@@ -156,6 +163,13 @@ const styles = {
     fontFamily: 'Avenir Next',
     opacity: 0.5,
     textAlign: 'center'
+  },
+  swipeToDelete: {
+    alignSelf: 'center',
+    fontWeight: '400',
+    fontFamily: 'Avenir Next',
+    fontSize: 14,
+    opacity: 0.7
   }
 }
 
@@ -172,5 +186,5 @@ const mapStateToProps = ({ sections }) => {
 }
 
 export default connect(mapStateToProps, { deleteExpense, reduceTotal })(
-  DataContainer
+  DataScreen
 )
